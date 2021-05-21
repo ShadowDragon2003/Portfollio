@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Simon : MonoBehaviour
+{
+    public static Simon instance { get; private set; }
+    public List<GameObject> cubesOrder = new List<GameObject>();
+    public GameObject[] colors = new GameObject[4];
+    public bool Running = true;
+    public Text score;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+
+    private void Update()
+    {
+        score.text = cubesOrder.Count.ToString();
+        if(Running)
+        {
+            foreach(GameObject Cube in colors)
+            {
+                Cube.layer = 2;
+            }
+            
+        }
+        else
+        {
+            foreach (GameObject Cube in colors)
+            {
+                Cube.layer = 0;
+            }
+        }
+            
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Running = true;
+         cubesOrder.Add(colors[Random.Range(0, colors.Length)]);
+       StartCoroutine(Show());
+        Destroy(this.GetComponent<BoxCollider>());
+    }
+
+    // Update is called once per frame
+    public void CubePressed()
+    {
+        cubesOrder.Add(colors[Random.Range(0,4)]);
+        StartCoroutine(Show());
+    }
+    IEnumerator Show()
+    {   Running = true;
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < cubesOrder.Count; i++)
+        {
+         
+            yield return new WaitForSeconds(0.5f);
+            Color c = cubesOrder[i].GetComponent<Renderer>().material.color;
+            cubesOrder[i].GetComponent<Renderer>().material.color = Color.white;
+            yield return new WaitForSeconds(0.5f);
+            cubesOrder[i].GetComponent<Renderer>().material.color = c;
+            
+        }
+       Running = false;
+    }
+}
