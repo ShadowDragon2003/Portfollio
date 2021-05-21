@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InventoryApp
+{
+    class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            Inventory inv = new Inventory();
+            HealthUp potion = new HealthUp("Health Potion","this will heal you", 23,5);
+            Resource wood = new Resource("Wood", "Piece of a tree",2,25);
+            DamageItem SwordOfEvil = new DamageItem("Sword Of Darkness", "Full of evill", 500, 20);
+            DefensiveItem Holyshield = new DefensiveItem("Holy Shield", "Full of Light", 1000, 50);
+
+            for (int i = 0; i < 13; i++)
+            {
+             inv.AddItem(potion);
+            }
+            for (int i = 0; i < 55; i++)
+            {
+              inv.AddItem(wood);
+            }
+      
+            inv.AddItem(SwordOfEvil);
+            inv.AddItem(Holyshield);
+
+             inv.RefreshInventory();
+
+
+            Console.ReadKey();
+
+
+        }
+    }
+}
