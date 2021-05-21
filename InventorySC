@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InventoryApp
+{
+    class Inventory
+    {
+
+       private List<Items> myItems = new List<Items>();
+
+        public void AddItem(Items item)
+        {
+            //Add item
+            if(item.Stackable)
+            {
+                foreach (Items items in myItems)
+                {
+                    if(items.Name == item.Name)
+                    {            
+                         item.StackCount++;                  
+                    }
+                }
+               
+                if (!myItems.Contains(item))
+                {
+                 myItems.Add(item);
+                }
+              
+                
+            }
+            else
+            {
+  
+            myItems.Add(item);
+            }
+          
+        
+     
+
+        }
+        public void RemoveItem(Items item)
+        {
+            //remove item
+            myItems.Remove(item);
+            //re-draw list items
+            RefreshInventory();
+     
+
+
+        }
+        public void RefreshInventory()
+        {
+            Console.Clear();
+            foreach (Items items in myItems)
+            {                
+                if (items.Stackable)
+                {
+                    int total = items.StackCount;
+                    while(total > items.MaxStackCount)
+                    {
+                        Console.WriteLine(items.Name + " x " + items.MaxStackCount);
+                        total -= items.MaxStackCount;
+                    }
+                    Console.WriteLine(items.Name + " x " + total);
+                }
+                else
+                {
+                    Console.WriteLine(items.Name);
+                }
+
+            }
+        }
+
+        public void Equip()
+        {
+            //remove item from Inventory
+            //put item in list of modifiers
+
+            //Equip the item to the player active slots
+        }
+
+
+        public void UnEquip()
+        {
+            //remove item from list of modifiers
+            //add item to Inventory
+
+
+            //UnEquip item
+        }
+
+
+
+    }
+}
