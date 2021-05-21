@@ -1,0 +1,122 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InventoryApp
+{
+
+   
+
+   
+    #region Equipment
+    class DefensiveItem : Items
+    {
+        int Defense;
+
+        public override void Use()
+        {
+            //add to STATS
+
+        }
+        public DefensiveItem(string name, string description, int price, int defense)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            Stackable = false;
+            StackCount = 0;
+            Defense = defense;
+        }
+
+
+    }
+    class DamageItem : Items
+    {
+        int Strength;
+        public override void Use()
+        {
+            //add to STATS
+
+        }
+        public DamageItem(string name, string description, int price, int strength)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            Stackable = false;
+            StackCount = 0;
+            Strength = strength;
+        }
+    }
+    #endregion
+
+
+    #region Consumables
+ class HealthUp : Items
+    {
+
+        public override void Use()
+        {
+
+            //add to STATS
+            Player.GainHP(10);
+            //showplayer what he did
+            Console.WriteLine("You Replenish health your HP is now" + Player.health);
+
+
+
+        }
+
+        public HealthUp(string name, string description, int price, int stackCount)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            Stackable = true;
+            MaxStackCount = stackCount;
+
+        }
+
+    }
+    #endregion
+
+
+    #region Resources
+ class Resource : Items
+    {
+
+
+        public Resource(string name, string description, int price, int stackCount)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            Stackable = true;
+            MaxStackCount = stackCount;
+           
+        }
+
+    }
+    #endregion
+  abstract class Items
+    {
+        public virtual string Name { get; set; }
+        public virtual string Description { get; set; }
+        public virtual int Price { get; set; }
+        public virtual bool Stackable { get; set; }
+        public virtual int StackCount { get; set; }
+        public virtual int MaxStackCount { get; set; }
+
+        public virtual void ToolTip()
+        {
+            //show item stats/description
+        }
+        public virtual void Use()
+        {
+            //use behavior
+        }
+    }
+
+}
