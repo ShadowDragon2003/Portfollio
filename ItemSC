@@ -9,7 +9,7 @@ namespace InventoryApp
 
    
 
-   
+    
     #region Equipment
     class DefensiveItem : Items
     {
