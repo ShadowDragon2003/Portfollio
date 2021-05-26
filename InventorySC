@@ -8,7 +8,7 @@ namespace InventoryApp
 {
     class Inventory
     {
-
+ 
        private List<Items> myItems = new List<Items>();
 
         public void AddItem(Items item)
