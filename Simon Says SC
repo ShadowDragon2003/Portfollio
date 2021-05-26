@@ -11,7 +11,7 @@ public class Simon : MonoBehaviour
     public bool Running = true;
     public Text score;
     void Awake()
-    {
+    { 
         if (instance == null)
         {
             instance = this;
